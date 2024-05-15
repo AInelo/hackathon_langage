@@ -5,7 +5,7 @@ const axios = require('axios');
 const app = express();
 
 const PORT = process.env.PORT || 3000;
-
+const path = require('path');
 // Configuration de Multer pour la gestion des fichiers audio
 
 
@@ -38,27 +38,50 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
+// app.get('/uploads/recorded_audio.webm', (req, res)  => {
+//   res.sendFile(path.join(__dirname,'uploads','recorded_audio.webm'))
+// })
+
+// app.post('/uploads/recorded_audio.webm', (req, res)  => {
+//   res.sendFile(path.join(__dirname,'uploads','recorded_audio.webm'))
+// })
+app.use('/uploads', express.static('uploads'));
+
+
+
 // Point de terminaison pour la réception de fichiers audio
-app.post('/record', upload.single('audio'), (req, res) => {
+app.post('/record', upload.single('audio'), async (req, res) => {
   // Récupérer les valeurs sélectionnées dans les balises <select>
   const language1 = req.body.language1;
   const language2 = req.body.language2;
   const speaker = req.body.speaker;
   const audioFile = req.file; // Fichier audio
 
-  // Effectuer différentes actions en fonction des valeurs sélectionnées
-  // Par exemple, vous pouvez utiliser les valeurs pour appeler une API de traduction, de reconnaissance vocale, etc.
-  console.log('Langue 1:', language1);
-  console.log('Langue 2:', language2);
-  console.log('Speaker:', speaker);
+  // Construire l'URL de l'API de transcription
+  const transcriptionAPIUrl = 'http://192.168.1.247:5000/transcribe';
+  const racine = '';
 
-  // Vous pouvez également utiliser le fichier audio envoyé avec req.file
-  console.log('Fichier audio:', req.file);
+  try {
+      // // Envoyer une requête POST à l'API de transcription avec le lien vers le fichier audio
+      const response = await axios.post(transcriptionAPIUrl, {
+          audio_link: `${audioFile.path}` // Utilisez le chemin du fichier audio local
+      });
 
-  // Répondre au client pour indiquer que les données ont été reçues avec succès
-  // Réponse au frontend avec les données
-  res.json({ audio: audioFile, text: ' Texte de test', speaker: speaker });
+      console.log(audio_link);
+
+      // Extraire la transcription de la réponse de l'API
+      const transcription = response.data.transcription;
+
+      // Répondre au client avec la transcription
+      fileFinale = audioFile.path;
+      console.log("le chemin du fichier est : " + fileFinale);
+      res.json({ audio: audioFile, text: 'text loaded', speaker: speaker });
+  } catch (error) {
+      console.error('Erreur lors de la transcription audio :', error);
+      res.status(500).json({ error: 'Erreur lors de la transcription audio' });
+  }
 });
+
 
 
 // Démarrer le serveur
