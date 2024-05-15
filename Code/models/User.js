@@ -21,6 +21,7 @@ const userSchema = new mongoose.Schema({
 });
 
 
+
 // Ajoutez la méthode comparePassword au schéma
 userSchema.methods.comparePassword = async function(candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password);

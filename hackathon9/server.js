@@ -4,7 +4,7 @@ const axios = require('axios');
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3003;
 const path = require('path');
 // Configuration de Multer pour la gestion des fichiers audio
 
@@ -38,13 +38,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// app.get('/uploads/recorded_audio.webm', (req, res)  => {
-//   res.sendFile(path.join(__dirname,'uploads','recorded_audio.webm'))
-// })
-
-// app.post('/uploads/recorded_audio.webm', (req, res)  => {
-//   res.sendFile(path.join(__dirname,'uploads','recorded_audio.webm'))
-// })
 app.use('/uploads', express.static('uploads'));
 
 
@@ -59,32 +52,48 @@ app.post('/record', upload.single('audio'), async (req, res) => {
 
   // Construire l'URL de l'API de transcription
   const transcriptionAPIUrl = 'http://192.168.1.247:5000/transcribe';
-  const racine = '';
+  const traductionAPIUrl = 'https://translator-api.glosbe.com/translateByLangWithScore?sourceLang=fon&targetLang=fr';
 
   try {
-      // // Envoyer une requête POST à l'API de transcription avec le lien vers le fichier audio
+      
+    console.log('nature du speaker= '+ speaker)
+
+    const audioFilePath = path.resolve(__dirname, audioFile.path); // Convertir le chemin relatif en chemin absolu
+    console.log('Chemin absolu du fichier audio: ' + audioFilePath);
+    // // Envoyer une requête POST à l'API de transcription avec le lien vers le fichier audio
       const response = await axios.post(transcriptionAPIUrl, {
-          audio_link: `${audioFile.path}` // Utilisez le chemin du fichier audio local
+          audio_link: `${audioFilePath}` // Utilisez le chemin du fichier audio local
       });
 
-      console.log(audio_link);
+      const transcription = response.data.transcription;
+
+      console.log(transcription);
+
+      const response1 = await axios.post(traductionAPIUrl, transcription,{
+        headers: {
+            'Content-Type': 'text/plain', // Indiquer que les données envoyées sont en JSON
+        }
+    });
+
+      //console.log(audio_link);
 
       // Extraire la transcription de la réponse de l'API
-      const transcription = response.data.transcription;
+      const traduction = response1.data.translation;
+
 
       // Répondre au client avec la transcription
       fileFinale = audioFile.path;
       console.log("le chemin du fichier est : " + fileFinale);
-      res.json({ audio: audioFile, text: 'text loaded', speaker: speaker });
+      res.json({ audio: audioFile, text: traduction, speaker: speaker });
   } catch (error) {
       console.error('Erreur lors de la transcription audio :', error);
       res.status(500).json({ error: 'Erreur lors de la transcription audio' });
   }
 });
 
-
+ipAdress = "192.168.1.247"
 
 // Démarrer le serveur
-app.listen(PORT, () => {
+app.listen(PORT,  () => {
   console.log(`Serveur démarré sur le port ${PORT}`);
 });
