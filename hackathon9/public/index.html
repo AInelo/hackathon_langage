@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Démarrage de l'enregistrement audio</title>
+    <!-- Incluez Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Inclure les icônes Material Design -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Votre CSS personnalisé -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class=" chat h-screen flex flex-col">
+        <div class="flex justify-center md:justify-center justify-between items-center lg:py-4">
+            <span class="hidden lg:inline-block ml-2 mr-2 text-white">Unlocal</span>
+            <select id="unlocalselect"
+                class="block w-32 py-2 px-4 rounded-md bg-white-200 focus:outline-none focus:bg-bwhite-200"
+                onchange="changeLanguage(this)">
+                <option value="fr">Français</option>
+                <option value="en">English</option>
+                <!-- Ajoutez d'autres langues si nécessaire -->
+            </select>
+            <div class="md:w-1/4">
+
+            </div>
+            <select id="localselect"
+                class="block w-32 py-2 px-4 rounded-md bg-blue-500 focus:outline-none focus:bg-blue-500"
+                onchange="changeLanguage(this)">
+                <option value="fr">Français</option>
+                <option value="en">English</option>
+                <!-- Ajoutez d'autres langues si nécessaire -->
+            </select>
+            <span class="hidden lg:inline-block ml-2 mr-2 text-blue-500">Local</span>
+        </div>
+
+
+        <div class=" flex-1 overflow-y-scroll ">
+
+            <script>
+                function changeLanguage(select) {
+                    var selectedValue = select.value;
+                    // Ajoutez ici le code pour mettre à jour la langue de votre application en fonction de selectedValue
+                    console.log("Langue sélectionnée : " + selectedValue);
+                }
+            </script>
+
+
+            <div id="transcript" class=" px-4 py-2  ">
+                <!-- <div class="flex items-center mb-2">
+                <img class="w-8 h-8 rounded-full mr-2" src="https://picsum.photos/50/50" alt="User Avatar">
+                <div class="font-medium">John Doe</div>
+            </div> -->
+                <!-- <div class="bg-white rounded-lg p-2 shadow mb-2 max-w-sm">
+                Hi, how can I help you?
+            </div>
+            <div class="flex items-center justify-end">
+                <div class="bg-blue-500 text-white rounded-lg p-2 shadow mr-2 max-w-sm">
+                    Sure, I can help with that.
+                </div>
+                <img class="w-8 h-8 rounded-full" src="https://picsum.photos/50/50" alt="User Avatar">
+            </div> -->
+
+
+
+            </div>
+
+
+        </div>
+        <div class="flex justify-center md:justify-center justify-between items-center md:py-4">
+            <div class="flex items-center ml-4">
+                <span class="hidden md:inline-block  mr-2 text-xl text-blue-500">Unlocal</span>
+                <button id="toggleButtonUnlocal"
+                    class="bg-white hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">
+                    <span class="material-icons  text-blue-500">mic</span>
+                    <div id="soundWaveUnlocal" class="sound-wave"></div>
+                </button>
+
+            </div>
+
+            <div class="md:w-1/4">
+
+            </div>
+
+            <div class="flex items-center mr-4">
+
+                <button id="toggleButtonLocal"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">
+                    <span class="material-icons">mic</span>
+                    <div id="soundWaveLocal" class="sound-wave"></div>
+                </button>
+                <span class="hidden md:inline-block ml-2 mr-2 text-xl text-white">Local</span>
+            </div>
+        </div>
+        <div class="flex justify-between items-center md:hidden">
+            <span class="text-xl ml-10 mr-2">U</span>
+            <span class="text-xl ml-2 mr-9">L</span>
+        </div>
+
+
+        <script>
+            let mediaRecorder;
+            let recordedChunks = [];
+            let isRecording = false;
+
+            function startRecording(buttonId) {
+                navigator.mediaDevices.getUserMedia({ audio: true })
+                    .then(function (stream) {
+                        mediaRecorder = new MediaRecorder(stream);
+
+                        mediaRecorder.ondataavailable = function (event) {
+                            recordedChunks.push(event.data);
+                        };
+
+                        mediaRecorder.onstop = function () {
+                            // const audioBlob = new Blob(recordedChunks, { type: 'audio/webm' });
+                            // const audioUrl = URL.createObjectURL(audioBlob);
+                            // const audio = new Audio(audioUrl);
+                            // audio.play();
+                            // L'enregistrement est terminé, envoyez les données audio au serveur
+
+                            const audioBlob = new Blob(recordedChunks, { type: 'audio/webm' });
+                            const formData = new FormData();
+                            formData.append('audio', audioBlob, 'recorded_audio.webm');
+
+                            // Récupérer les valeurs sélectionnées dans les balises <select>
+                            const select1 = document.getElementById('unlocalselect');
+                            const select2 = document.getElementById('localselect');
+                            let language1 = '';
+                            let language2 = '';
+                            let speaker = '';
+                            if (buttonId == 'toggleButtonUnlocal') {
+                                language1 = select1.value;
+                                language2 = select2.value;
+                                speaker = 'Unlocal';
+                            }
+                            if (buttonId == 'toggleButtonLocal') {
+                                language1 = select2.value;
+                                language2 = select1.value;
+                                speaker = 'Local';
+                            }
+
+                            // Ajouter les valeurs sélectionnées dans FormData
+                            formData.append('language1', language1);
+                            formData.append('language2', language2);
+                            formData.append('speaker', speaker);
+                            sendAudioToServer(formData);
+                        };
+
+                        recordedChunks = [];
+                        mediaRecorder.start();
+                        isRecording = true;
+                    })
+                    .catch(function (err) {
+                        console.error('Erreur de capture audio: ', err);
+                    });
+            }
+
+            function stopRecording() {
+                if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                    mediaRecorder.stop();
+                    isRecording = false;
+                }
+            }
+
+
+
+            // Envoyer les données audio au serveur
+            function sendAudioToServer(formData) {
+
+                fetch('/record', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Réponse du serveur:', data);
+                        const audioFile = data.audio;
+                        const text = data.text;
+                        const speaker = data.speaker;
+                        const audioUrl = '.\\uploads\\recorded_audio.webm';
+
+
+                        // Créer un nouvel élément div pour la transcription
+                        if (speaker == 'Unlocal') {
+                            const transcriptionDiv = document.createElement('div');
+
+                            transcriptionDiv.classList.add('bg-white', 'rounded-lg', 'p-2', 'shadow', 'mb-2', 'max-w-sm');
+                            transcriptionDiv.textContent = text;
+
+                            // Ajouter le bloc de transcription à l'élément avec l'ID 'transcript'
+                            const transcriptContainer = document.getElementById('transcript');
+                            transcriptContainer.appendChild(transcriptionDiv);
+
+                        }
+
+                        if (speaker == 'Local') {
+                            // Créer un nouvel élément div pour le bloc
+                            const containerDiv = document.createElement('div');
+                            containerDiv.classList.add('flex', 'items-center', 'justify-end');
+
+                            // Créer un nouvel élément div pour le texte
+                            const textDiv = document.createElement('div');
+                            textDiv.classList.add('bg-blue-500', 'text-white', 'rounded-lg', 'p-2', 'mb-2', 'shadow', 'mr-2', 'max-w-sm');
+                            textDiv.textContent = text;
+
+                            // Créer un nouvel élément img pour l'avatar de l'utilisateur
+                            const imgElement = document.createElement('img');
+                            imgElement.classList.add('w-8', 'h-8', 'rounded-full');
+                            imgElement.src = 'https://picsum.photos/50/50'; // URL de l'avatar
+                            imgElement.alt = 'User Avatar';
+
+                            // Ajouter le texte et l'avatar à l'élément conteneur
+                            containerDiv.appendChild(textDiv);
+                            containerDiv.appendChild(imgElement);
+
+                            // Ajouter le bloc à l'élément avec l'ID 'transcript'
+                            const transcriptContainer = document.getElementById('transcript');
+                            transcriptContainer.appendChild(containerDiv);
+                        }
+                        // Créer un nouvel élément audio pour la lecture de l'audio
+                        const audioElement = document.createElement('audio');
+                        audioElement.src = audioUrl;
+                        audioElement.controls = true;
+                        audioElement.autoplay = true; // Lecture automatique de l'audio
+
+                    })
+                    .catch(error => {
+                        console.error('Erreur lors de l\'envoi des données audio au serveur:', error);
+                    });
+            }
+
+            document.getElementById('toggleButtonLocal').addEventListener('click', () => {
+                if (!isRecording) {
+                    startRecording('toggleButtonLocal');
+                    document.getElementById('toggleButtonLocal').innerHTML = '<span class="material-icons text-White hover:text-blue-800">stop</span>';
+                } else {
+                    stopRecording();
+                    document.getElementById('toggleButtonLocal').innerHTML = '<span class="material-icons">mic</span>';
+                }
+            });
+
+            document.getElementById('toggleButtonUnlocal').addEventListener('click', () => {
+                if (!isRecording) {
+                    startRecording('toggleButtonUnlocal');
+                    document.getElementById('toggleButtonUnlocal').innerHTML = '<span class="material-icons text-blue-800 hover:text-white">stop</span>';
+                } else {
+                    stopRecording('toggleButtonUnlocal');
+                    document.getElementById('toggleButtonUnlocal').innerHTML = '<span class="material-icons">mic</span>';
+                }
+            });
+
+        </script>
+
+
+    </div>
+
+</body>
+
+</html>
