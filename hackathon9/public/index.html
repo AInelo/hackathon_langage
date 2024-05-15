@@ -174,7 +174,7 @@ function sendAudioToServer(formData) {
     const audioFile = data.audio;
     const text = data.text;
     const speaker = data.speaker;
-    const audioUrl = '.\\uploads\\recorded_audio.webm';
+    // const audioUrl = '.\\uploads\\recorded_audio.webm';
     
 
     // Créer un nouvel élément div pour la transcription
@@ -215,10 +215,10 @@ function sendAudioToServer(formData) {
     transcriptContainer.appendChild(containerDiv);
     }
         // Créer un nouvel élément audio pour la lecture de l'audio
-    const audioElement = document.createElement('audio');
-    audioElement.src = audioUrl;
-    audioElement.controls = true;
-    audioElement.autoplay = true; // Lecture automatique de l'audio
+    // const audioElement = document.createElement('audio');
+    // audioElement.src = audioUrl;
+    // audioElement.controls = true;
+    // audioElement.autoplay = true; // Lecture automatique de l'audio
     
         })
     .catch(error => {
