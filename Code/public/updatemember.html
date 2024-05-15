@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paroisse Ebenezer-Registre</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/progressBar.css" />
+
+    <link rel="shortcut icon" href="./Images/iconEbenzer.png" type="image/x-icon">
+    <script defer src="./js/mainUpdate.js"></script>
+</head>
+
+<body >
+
+  <nav class="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <img src="./Images/iconEbenzer.png" class="h-8" alt="Flowbite Logo">
+        <span class="self-center text-1xl font-semibold whitespace-nowrap">Paroisse Ebenezer</span>
+    </a>
+    <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <button id="addMemberButton" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Ajouter un membre</button>
+        <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+          </svg>
+      </button>
+    </div>
+    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+      <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        <li>
+          <a href="index.html" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Acceuil</a>
+        </li>
+       
+        <li>
+          <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Guides</a>
+        </li>
+        
+      </ul>
+    </div>
+    </div>
+  </nav>
+  
+    <section class="bg-white dark:bg-gray-900">
+        <div class="py-20 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
+            <div class="mx-auto mb-8 max-w-screen-sm lg:mb-16">
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Paroisse Ebenezer-Registre</h2>
+                <p class="font-bold text-gray-500 sm:text-xl dark:text-gray-400">Ici se trouve la liste de tous les fidèles de la paroisse Chrétienne Céleste Ebenezer.</p>
+            </div>             
+            <div id="member" class="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                
+            </div>  
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div  class="inset-0  items-center justify-center bg-gray-800"> -->
+<!-- <div class="absolute min-h-screen flex items-center justify-center mt-4 z-[1055] overflow-y-auto overflow-x-hidden"> -->
+  
+  
+<!-- <div class="w-full max-w-sm block absolute items-center justify-center bg-white border border-gray-200  top-1/2 left-1/2 transform rounded-lg shadow z-50">   -->
+  
+<div id="addMemberForm" class="h-screen w-screen flex bg-gray-500 bg-opacity-30 items-center justify-center fixed top-0 z-10000 hidden">
+  <div id="addMemberFormChild" class="max-h-sm max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 opacity-100 z-10000">
+    <form class="space-y-6" id="addMember">
+      <h5 class="text-xl font-medium text-gray-900 dark:text-white">Administrateur Connectez-vous</h5>
+      <div>
+        <label for="addMemberName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom du Fidèle</label>
+        <input type="text" name="name" id="addMemberName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Nom" required>
+      </div>
+      <div>
+        <label for="addMemberLastname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prénom du Fidèle</label>
+        <input type="text" name="lastname" id="addMemberLastname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Prenom" required>
+      </div>
+      <div>
+        <label for="addMemberNumber" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Téléphone</label>
+        <input type="text" name="url" id="addMemberNumber" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="URL" required>
+      </div>
+      <div  class="flex items-center justify-center w-full cursor-pointer">
+        <label for="image" class="flex flex-col items-center justify-center w-full h-24 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+            <div id="selectImage" class="img-area flex flex-col items-center justify-center pt-5 pb-6">
+                <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                </svg>
+                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Cliquer pour importer</span> ou drag and drop</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG or GIF (MAX. 800x400px)</p>
+            </div>
+            <input id="image" type="file" class="hidden" />
+        </label>
+    </div>
+    <!-- <div id="progress-bar-container" class="hidden w-full h-4 mt-4">
+      <div id="progress-bar" class="h-2 bg-blue-500"></div>
+    </div> -->
+     
+          
+      <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Ajouter membre</button>
+    </form>
+  </div>
+</div>
+<!-- </div> -->
+
+
+
+
+
+
+
+      
+    
+<footer class="bg-white rounded-lg shadow dark:bg-gray-900 m-4">
+    <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+        <div class="sm:flex sm:items-center sm:justify-between">
+            <a href="" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+                <img src="./Images/iconEbenzer.png" class="h-8" alt="Flowbite Logo" />
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Paroisse Ebenezer</span>
+            </a>
+            <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                <li>
+                    <a href="#" class="hover:underline me-4 md:me-6">About</a>
+                </li>
+                <li>
+                    <a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+                </li>
+                <li>
+                    <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
+                </li>
+                <li>
+                    <a href="#" class="hover:underline">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://ainelo.com/" class="hover:underline">TOTON Lionel</a>. Tous Droits Réservés.</span>
+    </div>
+</footer>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script src="./js/updateMember.js" ></script>
+</body>
+
+</html>
