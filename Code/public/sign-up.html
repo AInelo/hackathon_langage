@@ -1,0 +1,147 @@
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta19
+* @link https://tabler.io
+* Copyright 2018-2023 The Tabler Authors
+* Copyright 2018-2023 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+    <title>Inscription</title>
+    <link rel="shortcut icon" href="https://firebasestorage.googleapis.com/v0/b/lasmo-dcd6a.appspot.com/o/logo.png?alt=media&token=2eea40dc-3a50-4853-ac58-064bf597525f" type="image/x-icon">
+    <!-- CSS files -->
+    <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet"/>
+    <link href="./dist/css/tabler-flags.min.css?1684106062" rel="stylesheet"/>
+    <link href="./dist/css/tabler-payments.min.css?1684106062" rel="stylesheet"/>
+    <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet"/>
+    <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet"/>
+    <style>
+      @import url('https://rsms.me/inter/inter.css');
+      :root {
+      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+      }
+      body {
+      	font-feature-settings: "cv03", "cv04", "cv11";
+      }
+    </style>
+  </head>
+  <body  class=" d-flex flex-column">
+    <script src="./dist/js/demo-theme.min.js?1684106062"></script>
+    <div class="page page-center">
+      <div class="container container-tight py-4">
+        <div class="text-center mb-4">
+          <a href="." class="navbar-brand navbar-brand-autodark"><img src="./assets/images/logo.png" height="36" alt=""></a>
+        </div>
+        <form class="card card-md" novalidate>
+          <div class="card-body">
+            <h2 class="card-title text-center mb-4">Créer un nouveau compte</h2>
+            <div class="mb-3">
+              <label class="form-label">Nom</label>
+              <input id="lastname" type="text" class="form-control" placeholder="Entrer nom">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Prénoms</label>
+              <input id="firstname" type="text" class="form-control" placeholder="Entrer nom">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Address mail</label>
+              <input id="email" type="email" class="form-control" placeholder="Entrer email">
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label">Mot de passe</label>
+              <div class="input-group input-group-flat">
+                <input id="password" type="password" class="form-control"  placeholder="mot de passe"  autocomplete="off">
+                <span class="input-group-text">
+                  <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+                  </a>
+                </span>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Confirmez Mot de passe</label>
+              <div class="input-group input-group-flat">
+                <input id="password2" type="password" class="form-control"  placeholder="mot de passe"  autocomplete="off">
+                <span class="input-group-text">
+                  <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+                  </a>
+                </span>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-check">
+                <input type="checkbox" class="form-check-input"/>
+                <span class="form-check-label">Je suis d'accord avec les<a href="./terms-of-service.html" tabindex="-1"> termes et politiques</a>.</span>
+              </label>
+            </div>
+            <div class="form-footer">
+              <button id="registerButton" class="btn btn-primary w-100">Créer</button>
+            </div>
+          </div>
+        </form>
+        <div class="text-center text-muted mt-3">
+          Vous avez déjà un compte ?<a href="/login" tabindex="-1">Connectez-vous !</a>
+        </div>
+      </div>
+    </div>
+    <!-- Libs JS -->
+    <!-- Tabler Core -->
+    <script src="./dist/js/tabler.min.js?1684106062" defer></script>
+    <script src="./dist/js/demo.min.js?1684106062" defer></script>
+    <!-- Axios Libs -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+      <script>
+      const registerButton = document.getElementById("registerButton");
+          
+
+      registerButton.addEventListener("click", function (e) {
+        e.preventDefault();
+        const firstname = document.getElementById("firstname").value;
+        const lastname = document.getElementById("lastname").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const password2 = document.getElementById("password2").value;
+
+
+        // Vérifier si les champs email et password ne sont pas vides
+        if (!email || !password) {
+          alert("Veuillez saisir votre nom d'utilisateur et votre mot de passe.");
+          return;
+        }
+
+        // Effectuer la requête Axios
+        axios.post("/register", {
+          firstname : firstname,
+          lastname : lastname,
+          email : email,
+          password : password,
+          password2 : password2
+        })
+        .then(function (response) {
+          // Gérer la réponse en cas de succès
+          console.log("Inscritption réussie :", response);
+          // Rediriger l'utilisateur vers le dashboard si nécessaire
+          window.location.href = "/login";
+        })
+        .catch(function (error) {
+          // Gérer l'erreur en cas d'échec de l'authentification
+          console.error("Error while account creation :", error);
+          // Afficher un message d'erreur à l'utilisateur si nécessaire
+          alert("Error while account creation, please try again");
+        });
+      });
+   
+    </script>
+  
+  </body>
+</html>
