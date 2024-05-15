@@ -87,3 +87,18 @@ if __name__ == '__main__':
       app.run(debug=True, host='XXX.XXX.XXX.XXX', port=5000)
 
 ```
+
+5. Last STEP of building creat a ".env" file and add 
+```bash
+TRANSFORMER_URL_API_SPEECHTOTEXT = http://XXX.XXX.XXX.XXX:5000/transcribe
+```
+
+6. Thanks you go and visit this.
+```bash
+http://XXX.XXX.XXX.XXX:PORT/
+http://XXX.XXX.XXX.XXX:PORT/voiceartisans.html
+http://XXX.XXX.XXX.XXX:PORT/imagenerate.html
+http://XXX.XXX.XXX.XXX:PORT/bracelet.html
+```
+
+# THANKS 
