@@ -1,0 +1,39 @@
+/* Style pour l'onde sonore */
+#soundWave {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+}
+
+.chat{
+    background-image: url('img/bgdisc.jpg');
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    background-size: cover; /* Ajuste la taille de l'image pour couvrir entièrement l'élément */
+    background-attachment: fixed;
+}
+/* Animation pour l'onde sonore */
+@keyframes sound-wave {
+    0% {
+        opacity: 0;
+        transform: scale(0.2);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+
+/* Classe pour démarrer l'animation */
+.animate-sound-wave {
+    animation: sound-wave 1s ease-out;
+}
