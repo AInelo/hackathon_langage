@@ -84,6 +84,6 @@ def transcribe_audio():
 
 if __name__ == '__main__':
     # app.run(debug=True)
-      app.run(debug=True, host='192.168.1.247', port=5000)
+      app.run(debug=True, host='XXX.XXX.XXX.XXX', port=5000)
 
 ```
