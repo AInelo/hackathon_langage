@@ -11,6 +11,11 @@
     opacity: 0;
 }
 
+.chat1 {    background-image: url('ee.png');
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    background-size: cover; /* Ajuste la taille de l'image pour couvrir entièrement l'élément */
+    background-attachment: fixed;}
+
 .chat{
     background-image: url('./rydwane/img/bgdisc.jpg');
     background-repeat: no-repeat; /* Empêche la répétition de l'image */

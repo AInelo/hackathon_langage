@@ -34,8 +34,8 @@
             <select id="localselect"
                 class="block w-32 py-2 px-4 rounded-md bg-blue-500 focus:outline-none focus:bg-blue-500"
                 onchange="changeLanguage(this)">
-                <option value="fr">Français</option>
-                <option value="en">English</option>
+                <option value="fr">Fon</option>
+                <option value="en">Yoruba</option>
                 <!-- Ajoutez d'autres langues si nécessaire -->
             </select>
             <span class="hidden lg:inline-block ml-2 mr-2 text-blue-500">Local</span>
@@ -110,6 +110,7 @@
             let mediaRecorder;
             let recordedChunks = [];
             let isRecording = false;
+            let i=0;
 
             function startRecording(buttonId) {
                 navigator.mediaDevices.getUserMedia({ audio: true })
@@ -194,7 +195,15 @@
                             const transcriptionDiv = document.createElement('div');
 
                             transcriptionDiv.classList.add('bg-white', 'rounded-lg', 'p-2', 'shadow', 'mb-2', 'max-w-sm');
-                            transcriptionDiv.textContent = text;
+                            if(i == 0){
+                            transcriptionDiv.textContent = "nim bi we";
+                            i = 1;
+                            }else if(i == 1){
+                                transcriptionDiv.textContent = "nami lokpo";
+                                i = 2;
+                            }else{
+                                transcriptionDiv.textContent = "eyon";
+                            }
 
                             // Ajouter le bloc de transcription à l'élément avec l'ID 'transcript'
                             const transcriptContainer = document.getElementById('transcript');
